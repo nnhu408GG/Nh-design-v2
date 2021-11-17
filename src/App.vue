@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    Welcome to My UI-package
+    <br><br>
+    <div>
+      <nh-button @click="prbtn">Primary Button</nh-button>
+      <nh-btn @click="prbtn">hello</nh-btn>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+    prbtn() {
+      console.log(11111);
+    }
   }
 }
 </script>
