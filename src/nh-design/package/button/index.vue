@@ -7,6 +7,7 @@
     ]"
     :style="{
       borderStyle: dashed ? 'dashed' : 'solid',
+      width: block ? '100%' : ''
     }"
     @click="click"
   >
@@ -29,6 +30,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    block: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -45,6 +50,7 @@ export default {
       this.isClick = false;
       setTimeout(() => (this.isClick = true), 0);
       this.timer = setTimeout(() => (this.isClick = false), 1400);
+
       this.$emit("click");
     },
   },
@@ -159,7 +165,7 @@ export default {
   background-color: #f5f5f5;
   color: #00000040;
   box-shadow: none;
-  
+
   cursor: not-allowed;
 }
 </style>
