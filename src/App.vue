@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     Welcome to My UI-package
-    <br><br>
+    <br /><br />
     <div>
-      <nh-button type="primary" @click="prbtn">Primary Button</nh-button>
-      <nh-button @click="prbtn">Default Button</nh-button>
-      <nh-btn type="danger" @click="prbtn">Danger Default</nh-btn>
+      <nh-button type="primary" @click="clickEffect">Primary Button</nh-button>
+      <nh-button @click="clickEffect">Default Button</nh-button>
+      <nh-button @click="clickEffect" dashed>Dashed Button</nh-button>
+      <nh-btn type="danger" @click="clickEffect">Danger Default</nh-btn>
+      <nh-btn type="danger" @click="clickEffect" dashed
+        >Danger Dashed Default</nh-btn
+      >
     </div>
   </div>
 </template>
@@ -13,11 +17,11 @@
 <script>
 export default {
   methods: {
-    prbtn() {
+    clickEffect() {
       console.log(11111);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>

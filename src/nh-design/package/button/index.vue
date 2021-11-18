@@ -1,6 +1,9 @@
 <template>
   <button
     :class="['nh-btn', 'nh-btn-' + type, isClick ? 'nh-btn-click' : '']"
+    :style="{
+      borderStyle: dashed ? 'dashed' : 'solid',
+    }"
     @click="click"
   >
     <slot></slot>
@@ -14,6 +17,10 @@ export default {
       type: String,
       default: "nomal",
     },
+    dashed: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -23,9 +30,7 @@ export default {
   },
   methods: {
     click(e) {
-      if (this.type === "danger") {
-        e.target.style.setProperty("--fadeEffectColor", "#ff4d4f");
-      }
+      this.type === "danger" && e.target.style.setProperty("--fadeEffectColor", "#ff4d4f");
       this.timer && clearTimeout(this.timer);
       this.isClick = false;
       setTimeout(() => (this.isClick = true), 0);
@@ -39,9 +44,10 @@ export default {
 <style scoped>
 .nh-btn {
   position: relative;
-  margin: 0 4px;
+  margin: 4px;
   padding: 4px 15px;
-  border: 1px solid transparent;
+  border-width: 1px;
+  border-color: transparent;
   border-radius: 2px;
   border-color: #d9d9d9;
   box-shadow: 0 2px #0000000b;
@@ -50,7 +56,6 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji,
     segoe ui emoji, Segoe UI Symbol, noto color emoji;
-  /* font-weight:lighter; */
   transition: 0.3s;
   cursor: pointer;
 }
@@ -77,7 +82,6 @@ export default {
   --nh-btn-primary-color: #1890ff;
   --nh-btn-primary-color-hover: #40a9ff;
   --nh-btn-primary-color-active: #096dd9;
-
   border-color: var(--nh-btn-primary-color);
   background-color: var(--nh-btn-primary-color);
   color: #fefefe;
@@ -96,7 +100,6 @@ export default {
   --nh-btn-danger-color: #ff4d4f;
   --nh-btn-danger-color-hover: #ff7875;
   --nh-btn-danger-color-active: #d9363e;
-
   border-color: var(--nh-btn-danger-color);
   color: var(--nh-btn-danger-color);
 }
@@ -109,6 +112,8 @@ export default {
   color: var(--nh-btn-danger-color-active);
 }
 
+/* fadeEffect 褪色效果 */
+/* 为了能修改到 --fadeEffectColor 的值 */
 .nh-btn-click {
   --fadeEffectColor: #1890ff;
 }
@@ -124,12 +129,10 @@ export default {
 }
 @keyframes fadeEffect {
   0% {
-    /* box-shadow: 0 0 0 0px #1890ff; */
     box-shadow: 0 0 0 0px var(--fadeEffectColor);
     opacity: 0.2;
   }
   15% {
-    /* box-shadow: 0 0 0 6px #1890ff; */
     box-shadow: 0 0 0 5px var(--fadeEffectColor);
     opacity: 0.05;
   }
