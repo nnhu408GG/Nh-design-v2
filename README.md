@@ -8,7 +8,14 @@
 nh-button, nh-btn
 ```js
 type: [primary, danger]
-dashed: true|false      // 虚线
-disabled: true|false    // 禁用状态
-block: true|false       // 宽度自适应
+dashed: Boolean      // 虚线
+disabled: Boolean    // 禁用状态
+block: Boolean       // 宽度自适应
+```
+
+nh-card
+```js
+titile: String
+width: String
+block: Boolean
 ```

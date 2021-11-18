@@ -1,55 +1,52 @@
 <template>
   <div id="app">
-    Welcome to My UI-package
-    <br /><br />
-    <div>
-      <nh-button type="primary" @click="clickEffect" block
-        >Primary Button</nh-button
-      >
-      <nh-button @click="clickEffect">Default Button</nh-button>
-      <nh-button @click="clickEffect" dashed block>Dashed Button</nh-button>
-      <nh-btn type="danger" @click="clickEffect">Danger Default</nh-btn>
-      <nh-btn type="danger" @click="clickEffect" dashed>
-        Danger Dashed Default
-      </nh-btn>
+    <!-- Welcome to My UI-package<br /><br /> -->
 
-      <nh-btn disabled>Disable</nh-btn>
-      <nh-btn dashed disabled>Disable</nh-btn>
-    </div>
-    <div class="box">
-      <nh-btn type="primary" block>P</nh-btn>
-    </div>
+    <nh-card title="Card.1th">
+      Card content <br />
+      Card content Card content <br />
+      Card content Card content <br />
+      Card content
+    </nh-card>
+
+    <nh-card title="Card.2th" >
+      <nh-card title="Card.2.1th" ></nh-card>
+      <nh-card title="Card.2.1th" block></nh-card>
+      <nh-card title="Card.2.1th" ></nh-card>
+      <nh-card title="Card.2.1th" ></nh-card>
+      <nh-card title="Card.2.1th" ></nh-card>
+      <nh-card title="Card.2.1th" ></nh-card>
+    </nh-card>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    clickEffect() {
-      console.log(11111);
-    },
+  data() {
+    return {
+      listCard: [
+        {
+          titile: "卡片标题1",
+        },
+      ],
+    };
   },
 };
 </script>
 
 <style>
 body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 #app {
+  width: 100vw;
+  height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
-
-.box {
-  width: 100px;
-  height: 100px;
-  border: 2px #180271 solid;
-  /* display: grid; */
-  display: flex;
-  align-items: center;
 }
 </style>

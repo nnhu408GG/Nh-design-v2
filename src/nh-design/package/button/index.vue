@@ -7,7 +7,7 @@
     ]"
     :style="{
       borderStyle: dashed ? 'dashed' : 'solid',
-      width: block ? '100%' : ''
+      width: block ? '100%' : '',
     }"
     @click="click"
   >
@@ -41,6 +41,11 @@ export default {
       timer: null,
     };
   },
+
+  mounted() {
+    this.doubleFont();
+  },
+
   methods: {
     click(e) {
       if (this.disabled) return;
@@ -52,6 +57,14 @@ export default {
       this.timer = setTimeout(() => (this.isClick = false), 1400);
 
       this.$emit("click");
+    },
+
+    doubleFont() {
+      let el = this.$el;
+      if (el && el.innerText.length === 2) {
+        let _text = el.innerText;
+        el.innerHTML = _text[0] + "&nbsp;" + _text[1];
+      }
     },
   },
 };
