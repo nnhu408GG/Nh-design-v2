@@ -3,8 +3,9 @@
     Welcome to My UI-package
     <br><br>
     <div>
-      <nh-button @click="prbtn">Primary Button</nh-button>
-      <nh-btn @click="prbtn">hello</nh-btn>
+      <nh-button type="primary" @click="prbtn">Primary Button</nh-button>
+      <nh-button @click="prbtn">Default Button</nh-button>
+      <nh-btn type="danger" @click="prbtn">Danger Default</nh-btn>
     </div>
   </div>
 </template>
