@@ -5,4 +5,5 @@
 使用方式: `<nh-button>`
 
 ## support:
-- button
+- nh-button
+- nh-btn

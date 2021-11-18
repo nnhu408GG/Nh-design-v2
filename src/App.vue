@@ -7,9 +7,12 @@
       <nh-button @click="clickEffect">Default Button</nh-button>
       <nh-button @click="clickEffect" dashed>Dashed Button</nh-button>
       <nh-btn type="danger" @click="clickEffect">Danger Default</nh-btn>
-      <nh-btn type="danger" @click="clickEffect" dashed
-        >Danger Dashed Default</nh-btn
-      >
+      <nh-btn type="danger" @click="clickEffect" dashed>
+        Danger Dashed Default
+      </nh-btn>
+
+      <nh-btn disabled>Disable</nh-btn>
+      <nh-btn dashed disabled>Disable</nh-btn>
     </div>
   </div>
 </template>
@@ -25,6 +28,8 @@ export default {
 </script>
 
 <style>
+body {
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

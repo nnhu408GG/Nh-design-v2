@@ -1,6 +1,10 @@
 <template>
   <button
-    :class="['nh-btn', 'nh-btn-' + type, isClick ? 'nh-btn-click' : '']"
+    :class="[
+      'nh-btn',
+      isClick ? 'nh-btn-click' : '',
+      disabled ? 'nh-btn-disable' : 'nh-btn-' + type,
+    ]"
     :style="{
       borderStyle: dashed ? 'dashed' : 'solid',
     }"
@@ -21,6 +25,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -30,7 +38,9 @@ export default {
   },
   methods: {
     click(e) {
-      this.type === "danger" && e.target.style.setProperty("--fadeEffectColor", "#ff4d4f");
+      if (this.disabled) return;
+      this.type === "danger" &&
+        e.target.style.setProperty("--fadeEffectColor", "#ff4d4f");
       this.timer && clearTimeout(this.timer);
       this.isClick = false;
       setTimeout(() => (this.isClick = true), 0);
@@ -58,6 +68,8 @@ export default {
     segoe ui emoji, Segoe UI Symbol, noto color emoji;
   transition: 0.3s;
   cursor: pointer;
+
+  /* cursor: not-allowed; */
 }
 
 .nh-btn-nomal {
@@ -140,5 +152,14 @@ export default {
     box-shadow: 0 0 0 5px;
     opacity: 0;
   }
+}
+
+.nh-btn-disable {
+  border-color: #d9d9d9;
+  background-color: #f5f5f5;
+  color: #00000040;
+  box-shadow: none;
+  
+  cursor: not-allowed;
 }
 </style>
