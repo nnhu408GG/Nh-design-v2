@@ -1,36 +1,14 @@
 <template>
   <div id="app">
-    <!-- Welcome to My UI-package<br /><br /> -->
-
-    <nh-card title="Card.1th">
-      Card content <br />
-      Card content Card content <br />
-      Card content Card content <br />
-      Card content
-    </nh-card>
-
-    <nh-card title="Card.2th" >
-      <nh-card title="Card.2.1th" ></nh-card>
-      <nh-card title="Card.2.1th" block></nh-card>
-      <nh-card title="Card.2.1th" ></nh-card>
-      <nh-card title="Card.2.1th" ></nh-card>
-      <nh-card title="Card.2.1th" ></nh-card>
-      <nh-card title="Card.2.1th" ></nh-card>
-    </nh-card>
+   <Menu />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      listCard: [
-        {
-          titile: "卡片标题1",
-        },
-      ],
-    };
-  },
+  components: {
+    Menu: () => import('./view/menu.vue')
+  }
 };
 </script>
 

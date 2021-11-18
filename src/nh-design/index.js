@@ -17,7 +17,6 @@ const Nhdesign = {
     Vue.component("nh-submenu", submenu);
     Vue.component("nh-menu-item", menuItem);
 
-    const bus = new Vue()
   },
 };
 
