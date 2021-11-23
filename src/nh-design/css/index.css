@@ -1,0 +1,22 @@
+:root {
+    --nh-line: #adb0b8;
+
+    --nh-text         : #252b3a;
+    --nh-light-text   : #fefefe;
+    /* --nh-light-text: #fff; */
+
+
+    /* --nh-primary: #1890ff;
+    --nh-primary-hover: #40a9ff;
+    --nh-primary-active: #096dd9; */
+    --nh-primary         : #5e7ce0;
+    --nh-primary-hover   : #7693f5;
+    --nh-primary-active  : #344899;
+    --nh-primary-disabled: #beccfa;
+
+
+    --nh-danger         : #ff4d4f;
+    --nh-danger-hover   : #ff7875;
+    --nh-danger-active  : #d9363e;
+    --nh-danger-disabled: #fae7e7;
+}
