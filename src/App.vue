@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-   <Menu />
+    <Menu />
   </div>
 </template>
 
 <script>
 export default {
   components: {
-    Menu: () => import('./view/menu.vue')
-  }
+    Menu: () => import("./view/menu.vue"),
+  },
 };
 </script>
 
 <style>
+html {
+  overflow: hidden;
+}
 body {
   width: 100vw;
   height: 100vh;

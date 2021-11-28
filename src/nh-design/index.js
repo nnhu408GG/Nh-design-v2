@@ -1,8 +1,11 @@
+import "./css/index.css";
+
 import Button from "./package/button";
 import Card from "./package/card";
-import "./css/index.css";
+import Menu from "./package/menu"
 
 export {
   Button,
   Card,
+  Menu
 };

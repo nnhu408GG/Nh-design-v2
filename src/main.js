@@ -3,9 +3,10 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import { Button, Card } from './nh-design'
+import { Button, Card, Menu } from './nh-design'
 Vue.use(Button);
 Vue.use(Card);
+Vue.use(Menu);
 
 new Vue({
   render: h => h(App),

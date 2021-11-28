@@ -1,0 +1,17 @@
+.nh-menu {
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+
+  height: 100%;
+
+  overflow  : auto;
+  box-sizing: border-box;
+  box-shadow: 1px 0 1px #e5e6eb;
+
+  /* background-color: rgb(232, 255, 187); */
+}
+
+.nh-menu::-webkit-scrollbar {
+  display: none;
+}

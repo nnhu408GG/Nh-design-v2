@@ -22,9 +22,6 @@
 
 <script>
 export default {
-  // name: 'NhSubmenu',
-  // componentName: 'NhSubmenu',
-
   props: {
     title: {
       type: String,
@@ -34,62 +31,55 @@ export default {
 
   data() {
     return {
+      PADDINGLEFT: 24,
+
       paddingLeft: 24,
 
       isfocus: false,
       visiabled: false,
       scrollHeight: 0,
+
+      // Parent: this.$data,
+      // Parent: this.$parent.$children[1].$el,
     };
+  },
+  computed: {
+    Message() {
+      return "ok_message";
+    },
+  },
+
+  watch: {
+    "$parent.$data.scrollHeight"(val) {
+      console.log(val);
+    },
   },
 
   mounted() {
-    // try {
-    //   this.$parent.$options.methods.buf();
-    // }catch(e){console.log(e);}
+    // console.log(this.$slots.default);
     this.init();
   },
-
   methods: {
     init() {
-      // console.log(this.$data);
-      let _parent = this.$parent;
-
-      // console.log(this.$parent.$options._componentTag);
-      // let parent = this.$parent
-
-      let count = 0;
-      while (_parent && _parent.$options._componentTag === "nh-submenu") {
-        count++;
-        _parent = _parent.$parent;
-      }
-      this.paddingLeft = 24 * count + 24;
-
       let _ul = this.$el.children[1];
       this.scrollHeight = _ul.scrollHeight;
     },
 
     click(e) {
-      const _parent = this.$el.parentElement;
-      console.log(_parent);
       this.visiabled = !this.visiabled;
-      if (_parent.className === "nh-submenu__body") {
-        // this.$parent.$options.methods.buf();
+      this.setParentHeight();
+      this.$emit("click", e);
+    },
 
-        // let _p = this.$parent;
-        // _p.$data.scrollHeight = _p.$el.children[1].scrollHeight;
+    setParentHeight() {
+      const _parent = this.$el.parentElement;
+      if (_parent.className === "nh-submenu__body") {
         if (this.visiabled) {
           this.$parent.$data.scrollHeight += this.scrollHeight;
         } else {
           this.$parent.$data.scrollHeight -= this.scrollHeight;
         }
       }
-
-      this.$emit("click", e);
-    },
-
-    buf() {
-      console.log(this);
-      console.log("buf");
     },
   },
 };
