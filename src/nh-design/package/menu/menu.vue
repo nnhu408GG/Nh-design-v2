@@ -1,22 +1,12 @@
 <template>
-  <ul class="nh-menu" :style="{ width }">
+  <div class="nh-menu">
+    nh-menu
     <slot></slot>
-  </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    width: {
-      type: String,
-      default: "255px",
-    },
-  },
-
-  methods: {
-    clickItem() {
-     
-    },
-  },
+  name: "nhMenu",
 };
 </script>

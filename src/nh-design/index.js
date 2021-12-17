@@ -1,11 +1,13 @@
-import "./css/index.css";
+import "./index.css";
 
-import Button from "./package/button";
-import Card from "./package/card";
-import Menu from "./package/menu"
+// import Button from "./package/button";
+// import Card from "./package/card";
+// import nhMenu from "./package/menu"
+import collapse from "./package/collapse";
 
-export {
-  Button,
-  Card,
-  Menu
+export default {
+  collapse,
+  // Button,
+  // Card,
+  // nhMenu
 };

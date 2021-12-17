@@ -1,15 +1,10 @@
-import Vue from "vue"
-import Menu from "./menu.vue"
-import MenuItem from "./menu-item.vue"
-import SubMenu from "./submenu.vue"
-import "./css/menu.css"
-import "./css/menu-item.css"
-import "./css/submenu.css"
+import Vue from "vue";
+import nhMenu from "./menu.vue";
+import nhMenuitem from "./menuitem.vue";
 
-Menu.install = () => {
-    Vue.component("nh-menu", Menu);
-    Vue.component("nh-menu-item", MenuItem);
-    Vue.component("nh-submenu", SubMenu);
-}
+nhMenu.install = () => {
+  Vue.component(nhMenu.name, nhMenu);
+  Vue.component(nhMenuitem.name, nhMenuitem);
+};
 
-export default Menu
+export default nhMenu;
