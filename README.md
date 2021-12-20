@@ -1,10 +1,8 @@
 # nh-design-v2
 
-基于Vue2
+基于Element源码 Vue2
 
-造个UI组件的轮子
-
-使用方式: `<nh-btn>`
+UI轮子学习
 
 ## support:
 - nh-button, nh-btn

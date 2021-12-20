@@ -1,22 +1,13 @@
 <template>
   <div class="graffitiBoard">
     <div class="graffitiBoard__sidebar">
-      <nh-collapse
-        v-for="(item1, index1) in menuData"
-        :key="index1"
-        :title="item1.label"
-      >
-        <nh-collapse
-          v-for="(item2, index2) in item1.children"
-          :key="index2"
-          :title="item2.label"
-        >
-          <nh-collapse
-            v-for="(item3, index3) in item2.children"
-            :key="index3"
-            :title="item3.label"
-          ></nh-collapse>
-        </nh-collapse>
+      <nh-collapse title="title">
+        <template slot="title">
+          <div>html</div>
+        </template>
+        <div>ok</div>
+        <div>ok</div>
+        <div>ok</div>
       </nh-collapse>
     </div>
     <div class="graffitiBoard__content">
