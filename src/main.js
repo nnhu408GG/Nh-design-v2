@@ -7,7 +7,7 @@ Vue.config.productionTip = false;
 // Vue.use(NhDesign);
 
 import NhDesign from "./nh-design";
-Vue.use(NhDesign.collapse);
+Vue.use(NhDesign.nhMenu);
 
 // import { Button, Card, Menu } from "./nh-design";
 // Vue.use(Button);
