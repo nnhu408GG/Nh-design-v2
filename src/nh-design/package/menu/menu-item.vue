@@ -1,5 +1,5 @@
 <template>
-  <div class="nh-menuitem">
+  <div class="nh-menuitem" @click="resetChecked">
     <div
       v-if="$slots.default"
       class="default"
@@ -27,7 +27,7 @@ export default {
   methods: {
     initPaddingLeft() {
       let _parent = this.$parent;
-      /* if (_parent.$options.name === "nhTransition") {
+      if (_parent.$options.name === "nhTransition") {
         _parent = _parent.$parent;
       }
 
@@ -38,20 +38,16 @@ export default {
         if (_parent.$options.name === "nhTransition") {
           _parent = _parent.$parent;
         }
-      } */
-
-      let _count = 1;
-      do {
-        _parent = _parent.$parent;
-        _count = _count + 1;
-        if (_parent.$options.name === "nhTransition") {
-          _parent = _parent.$parent;
-        }
-      } while (_parent.$options.name === "nhSubmenu");
+      }
 
       if (_parent.$options.name === "nhMenu") {
         this.paddingLeft = _count * _parent.$props.paddingUnit;
       }
+    },
+
+    resetChecked() {
+      let res = document.querySelector(".nh-menu").contains(this.$el);
+      console.log(res);
     },
   },
 };
@@ -63,7 +59,12 @@ export default {
     display: flex;
     align-items: center;
     height: 40px;
-    background-color: rgb(121, 172, 143);
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f2f5fc;
+    }
   }
 }
 </style>
