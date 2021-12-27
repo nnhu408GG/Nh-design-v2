@@ -6,8 +6,10 @@ Vue.config.productionTip = false;
 // import * as NhDesign from "./nh-design";
 // Vue.use(NhDesign);
 
-import NhDesign from "./nh-design";
-Vue.use(NhDesign.nhMenu);
+import { select, menu, collapse } from "./nh-design";
+Vue.use(select);
+Vue.use(menu);
+Vue.use(collapse);
 
 // import { Button, Card, Menu } from "./nh-design";
 // Vue.use(Button);

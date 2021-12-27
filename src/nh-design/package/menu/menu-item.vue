@@ -45,9 +45,10 @@ export default {
       }
     },
 
-    resetChecked() {
-      let res = document.querySelector(".nh-menu").contains(this.$el);
-      console.log(res);
+    resetChecked(e) {
+      // let res = document.querySelector(".nh-menu").contains(this.$el);
+      // console.log(res);
+      this.$emit("click", e)
     },
   },
 };
