@@ -34,16 +34,23 @@ export default {
       el.style.opacity = 0;
     },
 
-    enter(el) {
-      this.scrollHeight = el.scrollHeight;
-      el.style.height = el.scrollHeight + "px";
-
+    enter(el, done) {
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;
+
+      this.scrollHeight = el.scrollHeight;
+      el.style.height = el.scrollHeight + "px";
       el.style.opacity = 1;
       el.style.overflow = "hidden";
+      done();
     },
     afterEnter() {
+      // this.$nextTick(() => {
+      //   console.log("scrollHeight", this.scrollHeight);
+      // });
+      setTimeout(() => {
+        console.log("scrollHeight", this.scrollHeight);
+      }, 1000);
       // el.style.height = "";
     },
 

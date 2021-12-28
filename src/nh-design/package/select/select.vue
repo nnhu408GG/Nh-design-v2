@@ -1,12 +1,7 @@
 <template>
-  <div class="nh-select" :style="{ width }">
+  <div class="nh-select" ref="nhSelect" :style="{ width }">
     <div class="nh-select__input">
-      <input
-        type="text"
-        :placeholder="placeholder"
-        @focus="visible = true"
-        @blur="visible = false"
-      />
+      <input type="text" :placeholder="placeholder" />
     </div>
     <nh-transition>
       <div class="nh-select__dropdown" v-if="visible">
@@ -32,8 +27,23 @@ export default {
       visible: true,
     };
   },
+
+  mounted() {
+    window.addEventListener("click", this.addEventListenerClick);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("click", this.addEventListenerClick);
+  },
+
+  methods: {
+    addEventListenerClick(e) {
+      this.visible = this.$refs.nhSelect.contains(e.target) ? true : false;
+      console.log(this.addEventListenerClick);
+    },
+  },
+
   components: {
-    // nhTransition: () => import("../transition/transition.vue"),
     nhTransition,
   },
 };
