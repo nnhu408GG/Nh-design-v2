@@ -3,16 +3,13 @@
     <div class="nh-select__input">
       <input type="text" :placeholder="placeholder" />
     </div>
-    <nh-transition>
-      <div class="nh-select__dropdown" v-if="visible">
-        <slot></slot>
-      </div>
-    </nh-transition>
+    <div class="nh-select__dropdown" ref="dropdown" v-if="visible">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
-import nhTransition from "../transition/transition.vue";
 export default {
   name: "nhSelect",
   props: {
@@ -24,7 +21,7 @@ export default {
   },
   data() {
     return {
-      visible: true,
+      visible: false,
     };
   },
 
@@ -38,13 +35,25 @@ export default {
 
   methods: {
     addEventListenerClick(e) {
-      this.visible = this.$refs.nhSelect.contains(e.target) ? true : false;
-      console.log(this.addEventListenerClick);
-    },
-  },
+      console.log("addEvent");
+      if (this.$refs.nhSelect.contains(e.target)) {
+        this.visible = true;
+        this.$nextTick(() => {
+          let el = this.$refs.dropdown;
+          el.style.height = "0px";
+          el.style.height = el.scrollHeight + "px";
+          console.log(el);
+          // this.$nextTick(()=>{})
+        });
+        //   setTimeout(() => {
+        //     console.log(el.scrollHeight);
+        //   }, 1000);
+      } else {
+        // let el = this.$refs.dropdown;
 
-  components: {
-    nhTransition,
+        this.visible = false;
+      }
+    },
   },
 };
 </script>
@@ -70,7 +79,6 @@ export default {
     // display: flex;
     // justify-content: center;
 
-    padding: 12px 0;
     transition: 0.3s;
     transition: 1s;
     background-color: rgb(207, 207, 207);
@@ -85,7 +93,7 @@ export default {
     background-color: var(--bgColor);
     box-shadow: 0 0 3px #00000091;
     transition: 0.3s;
-    // overflow: hidden;
+    overflow: hidden;
 
     &::after {
       content: "";

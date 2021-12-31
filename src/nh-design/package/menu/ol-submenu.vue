@@ -1,17 +1,19 @@
 <template>
   <div class="nh-submenu">
-    <div class="nh-submenu__title" @click="visible = !visible">
+    <div class="nh-submenu__title" @click="handleSubmenu">
       <slot name="title" :paddingLeft="paddingLeft">
         <div class="default" :style="{ paddingLeft: paddingLeft + 'px' }">
           {{ title }}
         </div>
       </slot>
     </div>
-    <nh-transition>
-      <div v-if="$slots.default && visible" class="nh-submenu__body">
-        <slot></slot>
-      </div>
-    </nh-transition>
+    <div
+      v-if="$slots.default && visible"
+      ref="submenu"
+      class="nh-submenu__body"
+    >
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -31,6 +33,8 @@ export default {
   data() {
     return {
       visible: this.open,
+      el: null,
+      isClosing: false /* 处理要关闭的状态标志 */,
       paddingLeft: 0,
     };
   },
@@ -55,11 +59,41 @@ export default {
       if (_parent.$options.name === "nhMenu") {
         this.paddingLeft = _count * _parent.$props.paddingUnit;
       }
-      console.log(this.paddingLeft);
     },
-  },
-  components: {
-    nhTransition: () => import("../transition/transition.vue"),
+
+    handleSubmenu() {
+      this.$emit("click", this.visible);
+
+      if (this.visible) {
+        this.el = this.$refs.submenu;
+        this.el.style.height = this.el.scrollHeight + "px";
+        setTimeout(() => {
+          this.el.style.height = "0px";
+          this.isClosing = true;
+          this.el.addEventListener("webkitTransitionEnd", this.handleOpen);
+        }, 0);
+      } else {
+        this.visible = true;
+        this.$nextTick(() => {
+          this.el = this.$refs.submenu;
+          this.el.style.height = "0px";
+          this.el.style.height = this.el.scrollHeight + "px";
+          this.isClosing = false;
+          this.el.addEventListener("webkitTransitionEnd", this.handleOpen);
+        });
+      }
+    },
+
+    /* transition执行完毕后的回调处理，并销毁监听器 */
+    handleOpen() {
+      if (this.isClosing) {
+        this.visible = false;
+      } else {
+        this.el.style.height = "";
+      }
+      this.el.removeEventListener("webkitTransitionEnd", this.handleOpen);
+      this.el = null;
+    },
   },
 };
 </script>

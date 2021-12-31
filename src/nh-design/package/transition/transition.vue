@@ -1,12 +1,5 @@
 <template>
-  <transition
-    @before-enter="beforeEnter"
-    @enter="enter"
-    @after-enter="afterEnter"
-    @before-leave="beforeLeave"
-    @leave="leave"
-    @after-leave="afterLeave"
-  >
+  <transition @before-enter="beforeEnter" @before-leave="beforeLeave">
     <slot></slot>
   </transition>
 </template>
@@ -21,56 +14,47 @@ export default {
   data() {
     return {
       scrollHeight: "",
+      el: null,
+      isClosing: false,
     };
   },
   methods: {
     beforeEnter(el) {
-      el.dataset.oldPaddingTop = el.style.paddingTop;
-      el.dataset.oldPaddingBottom = el.style.paddingBottom;
-      el.style.paddingTop = 0;
-      el.style.paddingBottom = 0;
+      this.el = el;
+      this.el.style.height = "0px";
+      el.addEventListener(
+        "DOMContentLoaded",
+        () => {
+          console.log("load ok");
+        },
+        false
+      );
 
-      el.style.height = "0px";
-      el.style.opacity = 0;
-    },
-
-    enter(el, done) {
-      el.style.paddingTop = el.dataset.oldPaddingTop;
-      el.style.paddingBottom = el.dataset.oldPaddingBottom;
-
-      this.scrollHeight = el.scrollHeight;
-      el.style.height = el.scrollHeight + "px";
-      el.style.opacity = 1;
-      el.style.overflow = "hidden";
-      done();
-    },
-    afterEnter() {
-      // this.$nextTick(() => {
-      //   console.log("scrollHeight", this.scrollHeight);
-      // });
       setTimeout(() => {
-        console.log("scrollHeight", this.scrollHeight);
-      }, 1000);
-      // el.style.height = "";
+        el.addEventListener("webkitTransitionEnd", this.handleOpen);
+        this.el.style.height = this.el.scrollHeight + "px";
+        this.isClosing = false;
+      }, 50);
     },
 
     beforeLeave(el) {
-      el.style.opacity = 1;
-      this.$nextTick(() => {
-        console.log(el.scrollHeight);
-        // el.style.height = this.scrollHeight + "px";
-        el.style.height = el.scrollHeight + "px";
-      });
+      this.el = el;
+      this.el.style.height = this.el.scrollHeight + "px";
+      setTimeout(() => {
+        this.el.style.height = "0px";
+        this.isClosing = true;
+        this.el.addEventListener("webkitTransitionEnd", this.handleOpen);
+      }, 0);
     },
-    leave(el) {
-      el.style.height = "0px";
-      el.style.overflow = "hidden";
-      el.style.paddingTop = 0;
-      el.style.paddingBottom = 0;
-    },
-    afterLeave(el) {
-      el.style.height = "";
-      el.style.opacity = 0;
+
+    handleOpen() {
+      if (this.isClosing) {
+        this.visible = false;
+      } else {
+        this.el.style.height = "";
+      }
+      this.el.removeEventListener("webkitTransitionEnd", this.handleOpen);
+      this.el = null;
     },
   },
 };
