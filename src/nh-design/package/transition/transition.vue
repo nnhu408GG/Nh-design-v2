@@ -22,13 +22,6 @@ export default {
     beforeEnter(el) {
       this.el = el;
       this.el.style.height = "0px";
-      el.addEventListener(
-        "DOMContentLoaded",
-        () => {
-          console.log("load ok");
-        },
-        false
-      );
 
       setTimeout(() => {
         el.addEventListener("webkitTransitionEnd", this.handleOpen);
