@@ -14,6 +14,10 @@ const router = new VueRouter({
           component: () => import("@/view/show-button.vue"),
         },
         {
+          path: "/show-menu",
+          component: () => import("@/view/show-menu.vue"),
+        },
+        {
           path: "/show-select",
           component: () => import("@/view/show-select.vue"),
         },

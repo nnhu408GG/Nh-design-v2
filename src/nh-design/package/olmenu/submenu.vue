@@ -1,19 +1,22 @@
 <template>
   <div class="nh-submenu">
-    <div class="nh-submenu__title" @click="handleSubmenu">
+    <div class="nh-submenu__title" @click="visible = !visible">
       <slot name="title" :paddingLeft="paddingLeft">
         <div class="default" :style="{ paddingLeft: paddingLeft + 'px' }">
           {{ title }}
+          <!-- <svg class="icon" viewBox="0 0 1638 1024" width="18" height="18">
+            <path
+              d="M682.3936 156.8768A153.6 153.6 0 0 1 867.5328 143.36l18.432 13.7216 579.1744 512a153.6 153.6 0 0 1-185.344 244.1216L1261.568 899.072 783.9744 477.184 306.5856 899.072a153.6 153.6 0 0 1-200.704 2.6624l-16.1792-15.9744a153.6 153.6 0 0 1-2.4576-200.4992l15.7696-16.384 579.3792-512z"
+            ></path>
+          </svg> -->
         </div>
       </slot>
     </div>
-    <div
-      v-if="$slots.default && visible"
-      ref="submenu"
-      class="nh-submenu__body"
-    >
-      <slot></slot>
-    </div>
+    <nh-transition>
+      <div v-if="$slots.default && visible" class="nh-submenu__body">
+        <slot></slot>
+      </div>
+    </nh-transition>
   </div>
 </template>
 
@@ -33,8 +36,6 @@ export default {
   data() {
     return {
       visible: this.open,
-      el: null,
-      isClosing: false /* 处理要关闭的状态标志 */,
       paddingLeft: 0,
     };
   },
@@ -59,41 +60,11 @@ export default {
       if (_parent.$options.name === "nhMenu") {
         this.paddingLeft = _count * _parent.$props.paddingUnit;
       }
+      console.log(this.paddingLeft);
     },
-
-    handleSubmenu() {
-      this.$emit("click", this.visible);
-
-      if (this.visible) {
-        this.el = this.$refs.submenu;
-        this.el.style.height = this.el.scrollHeight + "px";
-        setTimeout(() => {
-          this.el.style.height = "0px";
-          this.isClosing = true;
-          this.el.addEventListener("webkitTransitionEnd", this.handleOpen);
-        }, 0);
-      } else {
-        this.visible = true;
-        this.$nextTick(() => {
-          this.el = this.$refs.submenu;
-          this.el.style.height = "0px";
-          this.el.style.height = this.el.scrollHeight + "px";
-          this.isClosing = false;
-          this.el.addEventListener("webkitTransitionEnd", this.handleOpen);
-        });
-      }
-    },
-
-    /* transition执行完毕后的回调处理，并销毁监听器 */
-    handleOpen() {
-      if (this.isClosing) {
-        this.visible = false;
-      } else {
-        this.el.style.height = "";
-      }
-      this.el.removeEventListener("webkitTransitionEnd", this.handleOpen);
-      this.el = null;
-    },
+  },
+  components: {
+    nhTransition: () => import("../transition/transition.vue"),
   },
 };
 </script>

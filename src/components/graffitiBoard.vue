@@ -4,6 +4,7 @@
       <nh-menu>
         <!-- here is title -->
         <nh-menuitem @click="menuRouter('/show-select')">select</nh-menuitem>
+        <nh-menuitem @click="menuRouter('/show-menu')">menu</nh-menuitem>
       </nh-menu>
     </div>
     <div class="graffitiBoard__content">
